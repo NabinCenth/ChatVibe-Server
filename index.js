@@ -4,11 +4,26 @@ const path = require("path");
 const app= express();
 const {Server}= require("socket.io")
 const server=http.createServer(app);
-app.use(express.static(path.join(__dirname,"Public")));
+const cors= require("cors");
+
+ app.use(cors({ cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+    credentials: true
+  }}));
+
 app.get("/",(req,res)=>{
-    res.sendFile(path.join(__dirname,"public","index.html"));
+console.log(" a request was made to the server");
+res.send("HII")
+
 })
-const io= new Server(server);
+const io= new Server(server, {
+    cors: {
+      origin: "http://localhost:5173",
+      methods: ["GET", "POST"],
+      credentials: true
+    }
+  });
  io.on("connection",(socket)=>{
     console.log("New User:",socket.id);
    socket.on("message",(data)=>{
