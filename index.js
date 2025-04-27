@@ -19,7 +19,7 @@ res.send("HII")
 })
 const io= new Server(server, {
     cors: {
-      origin: "http://localhost:5173",
+      origin:["http://localhost:5173", "http://192.168.1.65:5173"],
       methods: ["GET", "POST"],
       credentials: true
     }
