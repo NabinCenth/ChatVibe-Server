@@ -7,7 +7,7 @@ const server=http.createServer(app);
 const cors= require("cors");
 
  app.use(cors({ cors: {
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173","https://chat-vibes.netlify.app/"],
     methods: ["GET", "POST"],
     credentials: true
   }}));
@@ -19,7 +19,7 @@ res.send("HII")
 })
 const io= new Server(server, {
     cors: {
-      origin:["http://localhost:5173", "http://192.168.1.65:5173"],
+      origin:["http://localhost:5173", "http://192.168.1.65:5173","https://chat-vibes.netlify.app/"],
       methods: ["GET", "POST"],
       credentials: true
     }
@@ -33,6 +33,7 @@ const io= new Server(server, {
  }
 );
 
-server.listen(3000,()=>{
-    console.log("Server is running on port 3000");
-})
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
