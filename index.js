@@ -19,13 +19,18 @@ res.send("HII")
 })
 const io= new Server(server, {
     cors: {
-      origin:["http://localhost:5173", "http://192.168.1.65:5173","https://chat-vibes.netlify.app/"],
+      origin:["http://localhost:5173", "http://192.168.1.75:5173","https://chat-vibes.netlify.app/"],
       methods: ["GET", "POST"],
       credentials: true
     }
   });
+
  io.on("connection",(socket)=>{
-    console.log("New User:",socket.id);
+  
+    socket.on("name",(name)=>{
+        console.log(name,", Connected to server");
+        socket.broadcast.emit("name",name);
+    });
    socket.on("message",(data)=>{
     console.log("Message Recieved",data);
     socket.broadcast.emit("message",data);
