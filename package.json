@@ -1,8 +1,9 @@
 {
-  "name": "chat-socket",
+  "name": "chat-vibes",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+     "dev": "nodemon index.js",
     "start": "node index.js"
   },
   "author": "",
