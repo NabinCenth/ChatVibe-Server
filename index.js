@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
         room="General";//Default room nam
         console.log("Room name is empty, setting to default 'General'",roomName);
       }
-       socket.to(socket.room).emit("users-name",name);
+       socket.to(room).emit("users-name",name);
              socket.join(room); 
   console.log("Joined room:", room);
   //for name 
