@@ -34,29 +34,19 @@ const io = new Server(server, {
 
 
 io.on("connection", (socket) => { 
-  //   socket.on("room", (room,roomCallback) => {
-  //        if (room.trim() === "") {
-  //       room="General";//Default room nam
-  //       console.log("Room name is empty, setting to default 'General'",room);
-  //     }
-  //       socket.join(room);
-  // socket.room = room;  
-  // console.log("Joined room:", room);
-  // roomCallback(room); // Call the callback with the room name
-  //   });
 
   socket.on("name", (name,room) => {
     //for room
     const roomName = room|| "";
       if (roomName.trim() === "") {
         room="General";//Default room nam
-        console.log("Room name is empty, setting to default 'General'",roomName);
+      
       }
        socket.to(room).emit("users-name",name);
              socket.join(room); 
-  console.log("Joined room:", room);
+  console.log(name,"Joined room:", room);
   //for name 
-    console.log(name, ", Connected to server");
+    console.log(name, " Connected to server");
     socket.broadcast.emit("name", name);
     socket.name = name; // Store the name in the socket object
     
@@ -70,7 +60,7 @@ socket.room = data.room || ""; // Get the room from the socket or default to an 
         console.log("Message Recieved in room", data, "Room:", data.room);
         socket.to(socket.room).emit("message", data);
         
-            console.log("Room name from client", data.room);
+         
      
    
     
